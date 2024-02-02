@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Boutique | Ecommerce</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/nouislider/nouislider.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/choices.js/public/assets/styles/choices.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.default.css') }}" id="theme-stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <h1 class="display-4">Thank you for your order, {{ first_name }}!</h1>
+            <p class="lead">Your order details:</p>
+            <ul class="list-group">
+                {% for item in cart_data %}
+                    <li class="list-group-item">{{ item.name }} - ${{ item.price }} x {{ item.quantity }}</li>
+                {% endfor %}
+            </ul>
+            <hr class="my-4">
+            <p class="lead">Total: ${{ total }}</p>
+        </div>
+    </div>
+
+    <div class="container text-center mb-5">
+        <a class="btn btn-primary" href="{{ url_for('clear_cart') }}">Back to Home</a>
+    </div>
+</body>
+</html>
