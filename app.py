@@ -166,10 +166,10 @@ def clear_cart():
 def update_quantity_endpoint(item_id, new_quantity):
     try:
         if update_quantity(item_id, new_quantity):
-            return redirect(url_for('cart'))  # Ganti 'cart' dengan nama fungsi yang menampilkan halaman keranjang belanja Anda
+            return redirect(url_for('cart'))  
         else:
-            # Handle error, jika diperlukan
+            
             return render_template('error.html', message='Failed to update quantity')
     except Exception as e:
-        # Handle error, jika diperlukan
+        
         return render_template('error.html', message=str(e))
