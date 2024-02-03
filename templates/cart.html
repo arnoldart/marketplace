@@ -136,8 +136,10 @@
                               <div class="border d-flex align-items-center justify-content-between px-3">
                                   <span class="small text-uppercase text-gray headings-font-family">Quantity</span>
                                   <div class="quantity">
-                                      <input class="form-control form-control-sm border-0 shadow-0 p-0" style="background-color: transparent !important;" type="text" value="{{ item.quantity }}" readonly/>
-                                  </div>
+                                    <a class="dec-btn p-0" href="{{ url_for('update_quantity_endpoint', item_id=item.id, new_quantity=item.quantity - 1) }}"><i class="fas fa-caret-left"></i></a>
+                                    <input class="form-control form-control-sm border-0 shadow-0 p-0" style="background-color: transparent !important;" type="text" value="{{ item.quantity }}" readonly/>
+                                    <a class="inc-btn p-0" href="{{ url_for('update_quantity_endpoint', item_id=item.id, new_quantity=item.quantity + 1) }}"><i class="fas fa-caret-right"></i></a>
+                                </div>
                               </div>
                           </td>
                             <td class="p-3 align-middle border-light">
@@ -230,6 +232,16 @@
         // while using file:// protocol
         // pls don't forget to change to your domain :)
         injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg'); 
+
+        function updateQuantity(itemId, newQuantity) {
+          fetch(`/update_quantity/${itemId}/${newQuantity}`, { method: 'PUT' })
+              .then(response => response.json())
+              .then(data => {
+                  console.log(data);
+                  // Handle response, jika diperlukan
+              })
+              .catch(error => console.error('Error:', error));
+      }
         
       </script>
       <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
