@@ -4,9 +4,9 @@ from flask import session
 
 db_config = {
     'host': 'localhost',
-    'user': 'your_username',
-    'password': 'your_password',
-    'database': 'your_database',
+    'user': 'root',
+    'password': '',
+    'database': 'db_marketplace',
 }
 
 def verify_user(username, password):
