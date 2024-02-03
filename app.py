@@ -1,6 +1,6 @@
 # app.py
 from flask import Flask, jsonify, render_template, request, redirect, url_for, flash, session
-from utils.db_utils import get_products, get_product_by_id, add_cart, verify_user, user_exists, create_user, get_user_cart, remove_item_from_cart, clear_user_cart
+from utils.db_utils import get_products, get_product_by_id, add_cart, verify_user, user_exists, create_user, get_user_cart, remove_item_from_cart, clear_user_cart, update_quantity
 from flask_session import Session
 
 app = Flask(__name__)
@@ -161,3 +161,15 @@ def clear_cart():
     user_id = session.get('user_id')
     clear_user_cart(user_id)
     return redirect(url_for('home'))
+
+@app.route('/update_quantity/<int:item_id>/<int:new_quantity>')
+def update_quantity_endpoint(item_id, new_quantity):
+    try:
+        if update_quantity(item_id, new_quantity):
+            return redirect(url_for('cart'))  # Ganti 'cart' dengan nama fungsi yang menampilkan halaman keranjang belanja Anda
+        else:
+            # Handle error, jika diperlukan
+            return render_template('error.html', message='Failed to update quantity')
+    except Exception as e:
+        # Handle error, jika diperlukan
+        return render_template('error.html', message=str(e))
